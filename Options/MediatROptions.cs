@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 
-namespace TS.MediatR;
+namespace TS.MediatR.Options;
 public sealed class MediatROptions
 {
     internal List<Assembly> Assemblies { get; set; } = new();
     internal List<Type> PipelineBehaviors { get; set; } = new();
 
-    public void AddRegisterAssemblies(params Assembly[] assemblies)
+    public void RegisterServicesFromAssemblies(params Assembly[] assemblies)
     {
         Assemblies.AddRange(assemblies);
     }

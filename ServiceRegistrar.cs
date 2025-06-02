@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TS.MediatR.Options;
 
 namespace TS.MediatR;
 
