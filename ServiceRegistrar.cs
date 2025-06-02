@@ -28,11 +28,11 @@ public static class ServiceRegistrar
                 .Select(s => new { Interface = s, Impletation = t })
                 );
 
-            services.AddTransient<ISender, Sender>();
+            services.AddScoped<ISender, Sender>();
 
             foreach (var item in handlerTypes)
             {
-                services.AddTransient(item.Interface, item.Impletation);
+                services.AddScoped(item.Interface, item.Impletation);
             }
         }
         #endregion
@@ -44,11 +44,11 @@ public static class ServiceRegistrar
 
             if (genericArg == 1)
             {
-                services.AddTransient(typeof(IPipelineBehavior<>), pipeline);
+                services.AddScoped(typeof(IPipelineBehavior<>), pipeline);
             }
             else if (genericArg == 2)
             {
-                services.AddTransient(typeof(IPipelineBehavior<,>), pipeline);
+                services.AddScoped(typeof(IPipelineBehavior<,>), pipeline);
             }
             else
             {
@@ -56,7 +56,6 @@ public static class ServiceRegistrar
             }
         }
         #endregion
-
 
         #region INotificationHandler
         foreach (var assembly in config.Assemblies)
@@ -71,7 +70,7 @@ public static class ServiceRegistrar
 
             foreach (var handler in handlerTypes)
             {
-                services.AddTransient(handler.Interface, handler.Implementation);
+                services.AddScoped(handler.Interface, handler.Implementation);
             }
         }
         #endregion

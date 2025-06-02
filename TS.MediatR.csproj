@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>9.0.3</Version>
+    <Version>9.0.6</Version>
     <Authors>Taner Saydam</Authors>
     <Company>Taner Saydam</Company>
     <Description>Lightweight and flexible Mediator library for .NET with support for CQRS, pipeline behaviors, and notifications. Built for clean and scalable architecture.</Description>

@@ -11,15 +11,15 @@ public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<
     Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
 }
 
-public delegate Task RequesteHandlerDelete();
-public delegate Task<TResponse> RequesteHandlerDelete<TResponse>();
+public delegate Task RequestHandlerDelegate();
+public delegate Task<TResponse> RequestHandlerDelegate<TResponse>();
 
 public interface IPipelineBehavior<TRequest>
     where TRequest : IRequest
 {
     Task Handle(
         TRequest request,
-        RequesteHandlerDelete next,
+        RequestHandlerDelegate next,
         CancellationToken cancellationToken = default
         );
 }
@@ -29,7 +29,7 @@ public interface IPipelineBehavior<TRequest, TResponse>
 {
     Task<TResponse> Handle(
         TRequest request,
-        RequesteHandlerDelete<TResponse> next,
+        RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken = default
         );
 }

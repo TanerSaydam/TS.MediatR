@@ -14,12 +14,11 @@ public sealed class Sender(
 {
     public async Task Send(IRequest request, CancellationToken cancellationToken = default)
     {
-        using var scoped = serviceProvider.CreateScope();
-        var sp = scoped.ServiceProvider;
+        var sp = serviceProvider;
         var interfaceType = typeof(IRequestHandler<>).MakeGenericType(request.GetType());
         var pipelineType = typeof(IPipelineBehavior<>).MakeGenericType(request.GetType());
 
-        RequesteHandlerDelete handlerDelete = () =>
+        RequestHandlerDelegate handlerDelete = () =>
         {
             var handler = sp.GetRequiredService(interfaceType);
             var method = interfaceType.GetMethod("Handle")!;
@@ -49,12 +48,11 @@ public sealed class Sender(
 
     public async Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
     {
-        using var scoped = serviceProvider.CreateScope();
-        var sp = scoped.ServiceProvider;
+        var sp = serviceProvider;
         var interfaceType = typeof(IRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TResponse));
         var pipelineType = typeof(IPipelineBehavior<,>).MakeGenericType(request.GetType(), typeof(TResponse));
 
-        RequesteHandlerDelete<TResponse> handlerDelete = () =>
+        RequestHandlerDelegate<TResponse> handlerDelete = () =>
         {
             var handler = sp.GetRequiredService(interfaceType);
             var method = interfaceType.GetMethod("Handle")!;
